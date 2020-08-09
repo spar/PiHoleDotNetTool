@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>phc</ToolCommandName>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <Authors>Sandeep Parekh</Authors>
+    <Description>A cross platform Dot Net Core tool for managing your Pi-Hole DNS sink hole using PiHoleApiClient package</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Copyright>Sandeep Parekh</Copyright>
+    <PackageProjectUrl>https://github.com/spar/PiHoleDotNetTool</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/spar/PiHoleDotNetTool</RepositoryUrl>
+    <RepositoryType>Github</RepositoryType>
+    <PackageTags>pi-hole,cli,dotnettool</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PiHoleApiClient" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
