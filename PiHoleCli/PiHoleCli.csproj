@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -14,10 +14,13 @@
     <RepositoryUrl>https://github.com/spar/PiHoleDotNetTool</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
     <PackageTags>pi-hole,cli,dotnettool</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="PiHoleApiClient" Version="1.0.0" />
+
   </ItemGroup>
 
   <ItemGroup>

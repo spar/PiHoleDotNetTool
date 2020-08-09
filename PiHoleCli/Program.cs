@@ -33,6 +33,7 @@ namespace PiHoleCli
                     }
 
                     SetUrl(args[1]);
+                    return;
                 }
 
                 if (args[0] == "setSecret")
@@ -44,23 +45,27 @@ namespace PiHoleCli
                     }
 
                     SetSecret(args[1]);
+                    return;
                 }
 
                 if (string.IsNullOrEmpty(_settings?.ApiUrl))
                 {
-                    Console.WriteLine("please use -setUrl and -setSecret to provide your pi-hole's api url and secret.");
+                    Console.WriteLine("Please use setUrl to provide your pi-hole's api url");
                     DisplayUsage();
                     return;
                 }
 
                 if (string.IsNullOrEmpty(_settings.ApiSecret))
                 {
-                    Console.WriteLine("API secret has not been set, CLI can only run unauthenticated commands. Use -setSecret to set API's secret");
+                    Console.WriteLine("Use setSecret to set API's secret");
+                    DisplayUsage();
+                    return;
                 }
 
                 if (args[0] == "up")
                 {
                     await UpAsync();
+                    return;
                 }
                 if (args[0] == "down")
                 {
@@ -70,6 +75,7 @@ namespace PiHoleCli
                         seconds = args[1];
                     }
                     await DownAsync(seconds);
+                    return;
                 }
             }
             catch (Exception e)
@@ -112,7 +118,8 @@ namespace PiHoleCli
             }
             catch (Exception e)
             {
-                Console.WriteLine($"something went wrong while enabling your pi-hole : {e.Message}");
+                Console.WriteLine($"Something went wrong while enabling your pi-hole.\n" +
+                    $"Make sure you have the right secret and there is network connectivity. :\n {e.Message}");
             }
         }
 
@@ -127,7 +134,10 @@ namespace PiHoleCli
                 var status = await client.Disable(s);
                 if (status.Status == "disabled")
                 {
-                    Console.WriteLine("Pi-Hole has been disabled.");
+                    if (s == 0)
+                        Console.WriteLine("Pi-Hole has been disabled.");
+                    else
+                        Console.WriteLine($"Pi-Hole has been disabled for {s} second(s)");
                 }
                 else
                 {
@@ -136,7 +146,8 @@ namespace PiHoleCli
             }
             catch (Exception e)
             {
-                Console.WriteLine($"something went wrong while disabled your pi-hole : {e.Message}");
+                Console.WriteLine($"Something went wrong while disabling your pi-hole.\n" +
+                    $"Make sure you have the right secret and there is network connectivity. :\n {e.Message}");
             }
         }
 
